@@ -1,0 +1,13 @@
+{
+    "name":  "keez1-munchen",
+    "private":  true,
+    "version":  "1.0.0",
+    "type":  "module",
+    "engines":  {
+                    "node":  "22.x"
+                },
+    "dependencies":  {
+                         "@vercel/functions":  "^2.2.13",
+                         "bcryptjs":  "^2.4.3"
+                     }
+}
