@@ -21,26 +21,28 @@ if (path.dirname(outputDirectory) !== projectRoot) {
 await fs.rm(outputDirectory, { recursive: true, force: true });
 await fs.mkdir(outputDirectory, { recursive: true });
 
-for (const languagePage of ['index.html', 'index-fr.html', 'index-de.html']) {
-  const source = path.join(projectRoot, languagePage);
-  await fs.access(source);
-  await fs.copyFile(source, path.join(outputDirectory, languagePage));
+const defaultLanguage = tenant.defaultLanguage;
+const defaultLanguagePage = defaultLanguage === 'en' ? 'index.html' : `index-${defaultLanguage}.html`;
+if (!defaultLanguage || !/^[a-z]{2}$/.test(defaultLanguage)) {
+  throw new Error(`Missing official language page for ${tenant.slug}: ${defaultLanguagePage}.`);
 }
+await fs.access(path.join(projectRoot, defaultLanguagePage));
+
+await fs.copyFile(
+  path.join(projectRoot, defaultLanguagePage),
+  path.join(outputDirectory, defaultLanguagePage),
+);
 
 await fs.cp(path.join(projectRoot, 'assets'), path.join(outputDirectory, 'assets'), {
   recursive: true,
 });
 
-const seoOutput = path.join(outputDirectory, 'generated', 'seo');
-await fs.mkdir(seoOutput, { recursive: true });
-for (const [sourceSuffix, destinationSuffix] of [
-  ['robots.txt', 'robots.txt'],
-  ['sitemap.xml', 'sitemap.xml'],
-]) {
+for (const seoFile of ['robots.txt', 'sitemap.xml']) {
   await fs.copyFile(
-    path.join(projectRoot, 'generated', 'seo', `${tenant.slug}-${sourceSuffix}`),
-    path.join(seoOutput, `${tenant.slug}-${destinationSuffix}`),
+    path.join(projectRoot, seoFile),
+    path.join(outputDirectory, seoFile),
   );
 }
 
-console.log(`Built ${tenant.slug} into ${outputDirectory}.`);
+console.log(`Built ${tenant.slug} (${defaultLanguage}) into ${outputDirectory}.`);
+

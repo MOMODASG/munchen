@@ -1,14 +1,14 @@
 {
     "$schema":  "https://openapi.vercel.sh/vercel.json",
-    "buildCommand": "node build-site.mjs",
+    "buildCommand":  "node build-site.mjs",
     "outputDirectory":  "dist",
     "proxy":  {
                   "entrypoint":  "proxy.js",
                   "matcher":  [
                                   "/",
                                   "/index.php",
-                                  "/robots.txt",
-                                  "/sitemap.xml",
+                                  "/de",
+                                  "/de/:path*",
                                   "/admin/:path*"
                               ]
               },

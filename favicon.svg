@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <style>
+      .leaf-motion{transform-box:fill-box;transform-origin:center;animation:leaf-sway 5s ease-in-out infinite}
+      @keyframes leaf-sway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+      @media (prefers-reduced-motion:reduce){.leaf-motion{animation:none}}
+    </style>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#173f2b"/>
+      <stop offset=".55" stop-color="#0b6b3b"/>
+      <stop offset="1" stop-color="#032b1b"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1=".2" y1="0" x2=".8" y2="1">
+      <stop stop-color="#b9e88a"/>
+      <stop offset=".42" stop-color="#4baa55"/>
+      <stop offset="1" stop-color="#126638"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feOffset dy="1"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".5"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="1" y="1" width="62" height="62" rx="18" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <g class="leaf-motion">
+      <g fill="url(#leaf)" stroke="#0a4d2d" stroke-width=".55" stroke-linejoin="round">
+        <path d="M31.8 49C29.5 38 25.2 27.1 20.2 18.5c-1.8-3.1-3.5-5.7-5.9-8.1 5.2-.3 10.1 2.2 13.2 6.6 3.1 4.5 4.5 11.3 4.3 18.2Z"/>
+        <path d="M32.2 44.2c-7.6-8.7-15.6-14.6-24-17.8 1.2 6.5 4.8 11.2 10.2 13.7 4.3 2 9.1 2.3 13.8 1.7Z"/>
+        <path d="M33.6 39.8c-3.1-12.1-2.9-22.3-.1-30.5 4.1 4.2 5.9 9.5 5.4 15.3-.4 5.2-2.4 10.5-5.3 15.2Z"/>
+        <path d="M34.1 43.8c6.3-9.7 13.7-16.5 22.2-20.4-.5 6.6-3.5 11.7-8.5 14.8-4.1 2.5-8.8 3.4-13.7 3.2Z"/>
+        <path d="M34.6 48.8c2.8-9 7.1-15.4 13.1-19.3.8 6.1-.9 11.3-5.2 15-2.4 2.1-5.1 3.5-7.9 4.3Z"/>
+        <path d="M32 54c-.5-9.7-.5-18.8 0-27.8"/>
+      </g>
+      <path d="M32 53.5c-.6-10-.5-19.1 0-27.2M31.8 39.4c-4.8-7.8-9.2-13-15-18M32.5 39.5c5.1-7.4 10.8-12.4 17.6-16.1M32 30.5c-.3-6.1-.2-11.3.8-16.5" fill="none" stroke="#d4eea0" stroke-opacity=".7" stroke-width=".75" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
